@@ -11,7 +11,7 @@ var gameType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Game",
 	Fields: graphql.Fields{
 		"id": &graphql.Field{
-			Type: graphql.Int,
+			Type: graphql.String,
 		},
 		"playername": &graphql.Field{
 			Type: graphql.String,
@@ -92,7 +92,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				id, isOK := params.Args["id"].(string)
 				if isOK {
 					game,_ := db.GameDB.FindByID(id)
-			
+
 					return game, nil
 				}
 
