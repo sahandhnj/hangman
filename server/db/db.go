@@ -8,6 +8,7 @@ import (
 )
 
 var database *mongo.Database
+var GameDB = GameDBModel{}
 
 const (
 	// COLLECTION the collection name
@@ -46,9 +47,9 @@ func (g *GameDBModel) FindByID(id string) (Game, error) {
 	return game, err
 }
 
-
 // Insert create model to mongo
 func (g *GameDBModel) Insert(game Game) error {
+	game.ID = bson.NewObjectId()
 	err := database.C(COLLECTION).Insert(&game)
 	
 	return err
