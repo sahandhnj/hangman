@@ -7,7 +7,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-var db *mongo.Database
+var database *mongo.Database
 
 const (
 	// COLLECTION the collection name
@@ -27,13 +27,13 @@ func (g *GameDBModel) Connect() {
 		log.Fatal(err)
 	}
 
-	db = session.DB(g.Database)
+	database = session.DB(g.Database)
 }
 
 // FindAll games
 func (g *GameDBModel) FindAll() ([]Game, error) {
 	var games []Game
-	err := db.C(COLLECTION).Find(bson.M{}).All(&games)
+	err := database.C(COLLECTION).Find(bson.M{}).All(&games)
 
 	return games, err
 }
@@ -41,7 +41,7 @@ func (g *GameDBModel) FindAll() ([]Game, error) {
 // FindByID finds one per Id
 func (g *GameDBModel) FindByID(id string) (Game, error) {
 	var game Game
-	err := db.C(COLLECTION).FindId(bson.ObjectIdHex(id)).One(&game)
+	err := database.C(COLLECTION).FindId(bson.ObjectIdHex(id)).One(&game)
 
 	return game, err
 }
@@ -49,13 +49,13 @@ func (g *GameDBModel) FindByID(id string) (Game, error) {
 
 // Insert create model to mongo
 func (g *GameDBModel) Insert(game Game) error {
-	err := db.C(COLLECTION).Insert(&game)
+	err := database.C(COLLECTION).Insert(&game)
 	
 	return err
 }
 
 // Update the current game
 func (g *GameDBModel) Update(game Game) error {
-	err := db.C(COLLECTION).UpdateId(game.ID, &game)
+	err := database.C(COLLECTION).UpdateId(game.ID, &game)
 	return err
 }
