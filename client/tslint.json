@@ -1,0 +1,12 @@
+{
+    "extends": ["tslint:recommended"],
+    "rules": {
+      "quotemark": [true, "single", "jsx-double"],
+      "trailing-comma": false,
+      "no-var-keyword": true,
+      "max-line-length": [true, 128],
+      "no-console": false
+    },
+    "rulesDirectory": []
+}
+  
