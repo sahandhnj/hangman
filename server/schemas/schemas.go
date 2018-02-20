@@ -4,6 +4,7 @@ import (
 	"log"
 	"git.sahand.cloud/sahand/hangman/server/db"
 	"git.sahand.cloud/sahand/hangman/server/models"
+	"git.sahand.cloud/sahand/hangman/server/services"	
 	"github.com/graphql-go/graphql"
 )
 
@@ -94,6 +95,30 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 					game,_ := db.GameDB.FindByID(id)
 
 					return game, nil
+				}
+
+				return models.Game{}, nil
+			},
+		},
+		// curl -g 'http://localhost:8080/api?query={answer(id:"id",letter:"w"){id,answers,playername,status,mistakes}}'
+		"answer": &graphql.Field{
+			Type:        gameType,
+			Description: "Retrieve Game",
+			Args: graphql.FieldConfigArgument{
+				"id": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+				"letter": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				id, idIsOk := params.Args["id"].(string)
+				letter, letterIsOk := params.Args["letter"].(string)
+				gameService := services.GameService{}
+
+				if idIsOk &&  letterIsOk{
+					gameService.Play(id, letter)
 				}
 
 				return models.Game{}, nil
