@@ -1,11 +1,11 @@
 package schemas
 
 import (
-	"log"
 	"git.sahand.cloud/sahand/hangman/server/db"
 	"git.sahand.cloud/sahand/hangman/server/models"
-	"git.sahand.cloud/sahand/hangman/server/services"	
+	"git.sahand.cloud/sahand/hangman/server/services"
 	"github.com/graphql-go/graphql"
+	"log"
 )
 
 var gameType = graphql.NewObject(graphql.ObjectConfig{
@@ -50,21 +50,20 @@ var rootMutation = graphql.NewObject(graphql.ObjectConfig{
 				// marshall and cast the argument value
 				playername, _ := params.Args["playername"].(string)
 
-
 				game := models.Game{
 					PlayerName: playername,
-					Word: "test",
-					Answers: []string{},
-					Status: 0,
-					Mistakes: 0,
+					Word:       "test",
+					Answers:    []string{},
+					Status:     0,
+					Mistakes:   0,
 				}
 
 				game.Answers = make([]string, len(game.Word))
-				for i:= range game.Answers {
+				for i := range game.Answers {
 					game.Answers[i] = "_"
 				}
 
-				err := db.GameDB.Insert(game);
+				err := db.GameDB.Insert(game)
 				if err != nil {
 					log.Fatal(err)
 				}
@@ -92,7 +91,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 
 				id, isOK := params.Args["id"].(string)
 				if isOK {
-					game,_ := db.GameDB.FindByID(id)
+					game, _ := db.GameDB.FindByID(id)
 
 					return game, nil
 				}
@@ -117,7 +116,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				letter, letterIsOk := params.Args["letter"].(string)
 				gameService := services.GameService{}
 
-				if idIsOk &&  letterIsOk{
+				if idIsOk && letterIsOk {
 					gameService.Play(id, letter)
 				}
 

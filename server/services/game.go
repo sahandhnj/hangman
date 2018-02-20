@@ -1,17 +1,17 @@
 package services
 
-import (	
-	"git.sahand.cloud/sahand/hangman/server/models"
+import (
 	"git.sahand.cloud/sahand/hangman/server/db"
+	"git.sahand.cloud/sahand/hangman/server/models"
 )
 
-type GameService struct {}
+type GameService struct{}
 
 func (g *GameService) Play(id string, letter string) (models.Game, error) {
-	game,_ := db.GameDB.FindByID(id)
+	game, _ := db.GameDB.FindByID(id)
 	hadAnAnswer := false
 
-	for i,char := range game.Word {
+	for i, char := range game.Word {
 		if string(char) == letter {
 			game.Answers[i] = letter
 			hadAnAnswer = true
@@ -24,7 +24,7 @@ func (g *GameService) Play(id string, letter string) (models.Game, error) {
 
 	hasAllLetters := true
 
-	for _,answer := range game.Answers {
+	for _, answer := range game.Answers {
 		if answer == "_" {
 			hasAllLetters = false
 		}

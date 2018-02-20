@@ -1,10 +1,10 @@
 package db
 
 import (
-	"log"
-	mongo "gopkg.in/mgo.v2"	
 	. "git.sahand.cloud/sahand/hangman/server/models"
+	mongo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+	"log"
 )
 
 var database *mongo.Database
@@ -15,7 +15,7 @@ const (
 	COLLECTION = "games"
 )
 
-// GameDBModel Mongo data model 
+// GameDBModel Mongo data model
 type GameDBModel struct {
 	Server   string
 	Database string
@@ -51,7 +51,7 @@ func (g *GameDBModel) FindByID(id string) (Game, error) {
 func (g *GameDBModel) Insert(game Game) error {
 	game.ID = bson.NewObjectId()
 	err := database.C(COLLECTION).Insert(&game)
-	
+
 	return err
 }
 

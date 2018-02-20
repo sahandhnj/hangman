@@ -7,16 +7,16 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/graphql-go/graphql"
-	"github.com/julienschmidt/httprouter"
 	"git.sahand.cloud/sahand/hangman/server/db"
 	"git.sahand.cloud/sahand/hangman/server/schemas"
+	"github.com/graphql-go/graphql"
+	"github.com/julienschmidt/httprouter"
 )
 
 const HOST = "localhost"
 const PORT = "8080"
 const DB_HOST = "localhost"
-const DB_NAME= "hangman"
+const DB_NAME = "hangman"
 
 func executeQuery(query string, schema graphql.Schema, operationName string, variables map[string]interface{}) *graphql.Result {
 	result := graphql.Do(graphql.Params{
@@ -29,7 +29,7 @@ func executeQuery(query string, schema graphql.Schema, operationName string, var
 	if len(result.Errors) > 0 {
 		fmt.Printf("unexpected errors: %v", result.Errors)
 	}
-	
+
 	return result
 }
 
@@ -98,7 +98,6 @@ func rootMiddleWare(fn httprouter.Handle) httprouter.Handle {
 	}
 }
 
-
 func main() {
 
 	router := httprouter.New()
@@ -107,13 +106,11 @@ func main() {
 	db.GameDB.Database = DB_NAME
 	db.GameDB.Connect()
 
-
-	// Two api method required 
+	// Two api method required
 	router.GET("/api", rootMiddleWare(apiHandler))
 	router.POST("/api", rootMiddleWare(apiHandler))
 	router.OPTIONS("/api", rootMiddleWare(optionsHandler))
-		
-	
+
 	const listen_address = HOST + ":" + PORT
 
 	fmt.Println("HangMan server listenting on", listen_address)
