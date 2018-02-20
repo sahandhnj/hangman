@@ -33,6 +33,10 @@ func executeQuery(query string, schema graphql.Schema, operationName string, var
 	return result
 }
 
+func optionsHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	w.Write([]byte(`{ "ok": true }`))
+}
+
 // graphql apiRequest type
 type apiRequest struct {
 	Query         string                 `json:"query"`
@@ -82,6 +86,10 @@ func apiHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 func rootMiddleWare(fn httprouter.Handle) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+
 		w.Header().Set("Accept", "application/json")
 		w.Header().Set("Accept-Charset", "utf8")
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -103,6 +111,8 @@ func main() {
 	// Two api method required 
 	router.GET("/api", rootMiddleWare(apiHandler))
 	router.POST("/api", rootMiddleWare(apiHandler))
+	router.OPTIONS("/api", rootMiddleWare(optionsHandler))
+		
 	
 	const listen_address = HOST + ":" + PORT
 
