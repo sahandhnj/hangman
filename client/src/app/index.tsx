@@ -4,28 +4,21 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { HashRouter as Router, Link, Route } from 'react-router-dom';
 
+import { Index } from './components/Index';
 
-import { GameView } from './components/gameView';
-import GameService from './services/game';
-  
+import GameService from './services/GameService';
+
 const gameService = new GameService();
-  
-const renderGameView = (props: any) => {
-    return <GameView game={gameService.game} {...props} />;
-};
 
 const renderIndex = (props: any) => {
-    return <div><h1>hangman</h1></div>;
+  return <Index gameService={gameService} {...props} />;
 };
-  
-gameService.createGame({playername: "sahand"}).then(() => {
-    ReactDOM.render(
-      <Router>
-          <div className="hangman-body">
-            <Route path={'/'} render={renderIndex} />
-            <Route path={'/new'} render={renderGameView} />
-          </div>
-      </Router>,
-      document.getElementById('app')
-    );
-  });
+
+ReactDOM.render(
+  <Router>
+    <div className="hangman-body">
+      <Route path={'/'} render={renderIndex} />
+    </div>
+  </Router>,
+  document.getElementById('app')
+);

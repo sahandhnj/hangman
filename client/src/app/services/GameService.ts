@@ -3,10 +3,12 @@ import ApolloClient from 'apollo-client/ApolloClient';
 import { HttpLink } from 'apollo-link-http';
 import gql from 'graphql-tag';
 import { getAllQuery, newGameMutationVariables } from '../api';
-import { IGame } from '../models/game';
+import { IGame } from '../models/Game';
 
 export default class GameService {
-  public game: IGame;
+  public game: IGame = {
+    playername: 'Sahand'
+  };
   public update = async () => {
     const data = await this.apiClient.query({
       query: gql`
@@ -44,7 +46,7 @@ export default class GameService {
     });
 
     if (data.data) {
-        this.game = data.data.createGame as IGame;        
+      this.game = data.data.createGame as IGame;
     }
   };
   private apiClient: ApolloClient<NormalizedCacheObject>;

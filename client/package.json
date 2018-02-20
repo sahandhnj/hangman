@@ -14,7 +14,8 @@
     "watch-prod": "NODE_ENV=production yarn run watch",
     "lint": "tslint --config ./tslint.json --fix --project .",
     "get-schema": "apollo-codegen introspect-schema ../schema.graphql --output src/schema.json",
-    "generate": "find src/app -regex '.*\\.tsx?' -exec apollo-codegen generate --schema src/schema.json --target typescript --addTypename true {} '+' | tee src/app/api.ts"
+    "generate":
+      "find src/app -regex '.*\\.tsx?' -exec apollo-codegen generate --schema src/schema.json --target typescript --addTypename true {} '+' | tee src/app/api.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.39",
