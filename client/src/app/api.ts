@@ -11,6 +11,11 @@ export interface newGameMutationVariables {
   playername: string;
 }
 
+export interface newGameQueryVariables {
+  letter: string;
+  id: string;
+}
+
 export interface newGameMutation {
   createGame: {
     __typename: 'Game';

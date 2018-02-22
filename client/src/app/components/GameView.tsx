@@ -4,6 +4,7 @@ import { IGame } from '../models/Game';
 export interface IGameViewProps {
   game: IGame;
   handleKeyPress: any
+  resetGame: any
 }
 
 export class GameView extends React.Component<IGameViewProps, {}> {
@@ -22,7 +23,7 @@ export class GameView extends React.Component<IGameViewProps, {}> {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  public handleChange(event: any) {
+  public async handleChange(event: any) {
     this.setState({ letter: event.target.value });
     let realLetter = event.target.value;
 
@@ -37,9 +38,23 @@ export class GameView extends React.Component<IGameViewProps, {}> {
       return this.cleanInput();      
     }
       
-    
-    this.props.handleKeyPress(realLetter);
+    await this.props.handleKeyPress(realLetter);
     this.addToChosens(realLetter);
+
+    if(this.props.game.status === 1){
+      setTimeout(()=>{
+        alert('Yo Won')        
+        this.props.resetGame()        
+      },200)
+    }
+
+     if(this.props.game.status === 2){
+      setTimeout(()=>{
+        alert('Yo Lost')        
+        this.props.resetGame()        
+      },200)     
+    }
+
     return this.cleanInput();   
   }
 
@@ -56,7 +71,6 @@ export class GameView extends React.Component<IGameViewProps, {}> {
       })
     }
     else {
-      console.log('Adding', letter, 'To',this.state.chosenLetters)
       this.state.chosenLetters.push(letter);
     }
   }

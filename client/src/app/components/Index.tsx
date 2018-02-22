@@ -34,13 +34,22 @@ export class Index extends React.Component<INewGameProps, {}> {
   };
 
   private processLetter = async (letter: string) => {
-    console.log(letter);
+    await this.props.gameService.play(letter, this.state.game.id)
+    this.setState({
+      game: this.props.gameService.game,
+    });
+  }
+
+  private resetGame = () =>{
+    this.setState({
+      gameIsThere: false
+    });
   }
 
   public render() {
     return (
       <div className="game">
-        {this.state.gameIsThere && <GameView game={this.state.game} handleKeyPress={this.processLetter}  />}
+        {this.state.gameIsThere && <GameView game={this.state.game} handleKeyPress={this.processLetter} resetGame={this.resetGame} />}
         {!this.state.gameIsThere && <NewGame handleSubmit={this.handleSubmit} />}
       </div>
     );

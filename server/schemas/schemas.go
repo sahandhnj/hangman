@@ -48,13 +48,12 @@ var rootMutation = graphql.NewObject(graphql.ObjectConfig{
 				},
 			},
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-
 				// marshall and cast the argument value
 				playername, _ := params.Args["playername"].(string)
 
 				game := models.Game{
 					PlayerName: playername,
-					Word:       "test",
+					Word:       "TEST",
 					Answers:    []string{},
 					Status:     0,
 					Mistakes:   0,
@@ -120,7 +119,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				gameService := services.GameService{}
 
 				if idIsOk && letterIsOk {
-					gameService.Play(id, letter)
+					return gameService.Play(id, letter)
 				}
 
 				return models.Game{}, nil

@@ -31,11 +31,11 @@ func (g *GameService) Play(id string, letter string) (models.Game, error) {
 	}
 
 	if hasAllLetters {
-		game.Status = 2
+		game.Status = 1
 	}
 
 	if game.Mistakes == 5 {
-		game.Status = 1
+		game.Status = 2
 	}
 
 	db.GameDB.Update(game)
