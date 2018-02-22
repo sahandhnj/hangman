@@ -6,6 +6,8 @@ import (
 	"git.sahand.cloud/sahand/hangman/server/services"
 	"github.com/graphql-go/graphql"
 	"log"
+	"math/rand"
+	"strconv"
 )
 
 var gameType = graphql.NewObject(graphql.ObjectConfig{
@@ -56,6 +58,7 @@ var rootMutation = graphql.NewObject(graphql.ObjectConfig{
 					Answers:    []string{},
 					Status:     0,
 					Mistakes:   0,
+					GameId: strconv.Itoa(rand.Intn(1000000000000000)),
 				}
 
 				game.Answers = make([]string, len(game.Word))

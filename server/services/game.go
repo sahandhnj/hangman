@@ -8,7 +8,7 @@ import (
 type GameService struct{}
 
 func (g *GameService) Play(id string, letter string) (models.Game, error) {
-	game, _ := db.GameDB.FindByID(id)
+	game, _ := db.GameDB.FindByGameID(id)
 	hadAnAnswer := false
 
 	for i, char := range game.Word {

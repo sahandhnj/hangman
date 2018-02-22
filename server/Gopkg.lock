@@ -26,29 +26,6 @@
   version = "v1.1"
 
 [[projects]]
-  name = "github.com/pkg/errors"
-  packages = ["."]
-  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
-  version = "v0.8.0"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/volatiletech/inflect"
-  packages = ["."]
-  revision = "e7201282ae8da26cd97aed2e516f75c0bd91bb93"
-
-[[projects]]
-  name = "github.com/volatiletech/sqlboiler"
-  packages = [
-    "boil",
-    "queries",
-    "queries/qm",
-    "strmangle"
-  ]
-  revision = "6b95e5d3d7840a737841e2eb446e1c82641f8393"
-  version = "v2.6.0"
-
-[[projects]]
   branch = "v2"
   name = "gopkg.in/mgo.v2"
   packages = [
@@ -63,6 +40,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6624e86874664b742134053e833118d64f506b00eb3d4e71778cc6c04ea6843c"
+  inputs-digest = "efc241051a4f7ee7da2ad14d7762b481b826eb8409d8cc6f67b235235c6f67a5"
   solver-name = "gps-cdcl"
   solver-version = 1
