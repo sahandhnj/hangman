@@ -40,7 +40,7 @@ func (g *GameDBModel) FindAll() ([]Game, error) {
 }
 
 // FindByGameID
-func (g *GameDBModel) FindByGameID (id string) (Game, error){
+func (g *GameDBModel) FindByGameID(id string) (Game, error) {
 	var game Game
 	err := database.C(COLLECTION).Find(bson.M{"gameid": id}).One(&game)
 

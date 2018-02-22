@@ -57,7 +57,7 @@ var rootMutation = graphql.NewObject(graphql.ObjectConfig{
 					Answers:    []string{},
 					Status:     0,
 					Mistakes:   0,
-					GameId: strconv.Itoa(rand.Intn(1000000000000000)),
+					GameId:     strconv.Itoa(rand.Intn(1000000000000000)),
 				}
 
 				game.Answers = make([]string, len(game.Word))

@@ -56,24 +56,23 @@ export default class GameService {
       letter: letter
     };
 
-
     const data: any = await this.apiClient.query({
       query: gql`
-        query play ($id: String, $letter: String) {
-          answer (id: $id, letter: $letter) {
+        query play($id: String, $letter: String) {
+          answer(id: $id, letter: $letter) {
             id
             answers
             playername
             status
             mistakes
           }
-        }`
-      ,
+        }
+      `,
       variables
     });
 
     if (data.data) {
-      this.game = data.data.answer as IGame;      
+      this.game = data.data.answer as IGame;
     }
   };
 

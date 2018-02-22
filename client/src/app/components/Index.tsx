@@ -34,17 +34,17 @@ export class Index extends React.Component<INewGameProps, {}> {
   };
 
   private processLetter = async (letter: string) => {
-    await this.props.gameService.play(letter, this.state.game.id)
+    await this.props.gameService.play(letter, this.state.game.id);
     this.setState({
-      game: this.props.gameService.game,
+      game: this.props.gameService.game
     });
-  }
+  };
 
-  private resetGame = () =>{
+  private resetGame = () => {
     this.setState({
       gameIsThere: false
     });
-  }
+  };
 
   public render() {
     return (

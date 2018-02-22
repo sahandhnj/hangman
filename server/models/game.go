@@ -14,7 +14,7 @@ const (
 
 type Game struct {
 	ID         bson.ObjectId `bson:"_id" json:"dbid"`
-	GameId     string 			 `bson:"gameid" json:"id"`
+	GameId     string        `bson:"gameid" json:"id"`
 	PlayerName string        `bson:"playername" json:"playername"`
 	Word       string        `bson:"word" json:"word"`
 	Answers    []string      `bson:"answers" json:"answers"`
