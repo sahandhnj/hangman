@@ -33,10 +33,14 @@ export class Index extends React.Component<INewGameProps, {}> {
     });
   };
 
+  private processLetter = async (letter: string) => {
+    console.log(letter);
+  }
+
   public render() {
     return (
       <div className="game">
-        {this.state.gameIsThere && <GameView game={this.state.game} />}
+        {this.state.gameIsThere && <GameView game={this.state.game} handleKeyPress={this.processLetter}  />}
         {!this.state.gameIsThere && <NewGame handleSubmit={this.handleSubmit} />}
       </div>
     );
